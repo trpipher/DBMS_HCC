@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import {getAddress} from './DBUtil/getAddress'
 
 class App extends Component{
   
@@ -8,14 +9,7 @@ class App extends Component{
   }  
 
   componentDidMount(){
-    this.getProducts();
-  }
-
-  getProducts = _ =>{
-    fetch('http://localhost:3001/address')
-      .then(response => response.json())
-      .then(response => this.setState({address: response.data}))
-      .catch(err => console.log(err))
+    getAddress(this);
   }
 
   renderAddress = address =><tr><td key={address.address_id} align="left">{address.address}</td><td align="right">{address.address2}</td><td align="right">{address.district}</td></tr>
