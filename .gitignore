@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-/DB_HCC/config.js
+/src/DBUtil/config.js
 # testing
 /coverage
 
