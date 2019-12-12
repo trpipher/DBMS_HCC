@@ -30,7 +30,7 @@ function CheckoutCard(props){
                     </Card>
                 </Container>
 
-                <Card.Link href="memberpage">Member: 10071</Card.Link>
+                <Card.Link href="/addmember">Member: 10071</Card.Link>
 
                 <Card.Link>Harrison Wright</Card.Link>
                 <Container>

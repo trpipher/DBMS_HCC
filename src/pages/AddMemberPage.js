@@ -2,62 +2,106 @@ import React from 'react';
 import { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-
-import {getAddress} from '../DBUtil/getAddress'
-import {getMembers} from '../DBUtil/getMembers'
+import './AddMember.css';
+import {addMember} from '../DBUtil/addMember'
 
 
 
 class AddMemberPage extends Component{
   
     
+  
+    
     state = {
-        address : [],
-        members: [],
         member: {
           firstname: "Gang",
-          lastname: "",
-          spouse:"",
+          lastname: "Heyy",
+          spouse:"Tiffany",
+          phone:"410",
+          email:"trpip",
+          Membership:"",
+          address:"102Bre",
+          address2:"104 apt",
+          city:"hat",
+          district:"MS",
+          postal:"12341"
+
           
         }
       }  
     
       componentDidMount(){
-        getAddress(this)
-        getMembers(this)
         
       }
-    
-      renderAddress = address =><tr><td key={address.address_id} align="left">{address.address}</td><td align="right">{address.address2}</td><td align="right">{address.district}</td></tr>
-      renderMembers = members =><tr><td key={members.id} align="left">{members.firstname}</td><td align="right">{members.lastname}</td><td align="right">{members.spouse}</td></tr>
       
-      onChange = (e) => {
-          this.setState({[e.target.name] : e.target.value})
+      
+      onClick = _ => {
+        const {member } = this.state;
+        addMember(member.firstname, member.lastname, member.spouse, member.email, member.Membership, member.address, member.address2, member.district, member.city, member.postal, member.phone);
       }
 
     render(){
-
-        const myStyle = {
-            margin : "15px"
-        }
-
-        const { address, members, member } = this.state;
+      
+      const { member } = this.state;
       return (
         <div className="App">
-            <form style={{marginLeft:"30px"}}>
-                <div align="left">
-                    <p style={{whiteSpace:"pre-wrap"}}>First Name:                                          Last Name:</p>
-                    <input type='text' value={this.state.member.firstname} onChange={this.onChange}/>
-                    <input type='text' style={{marginLeft:"35px"}}/>
-                </div>
-            </form>
+          <h1>Add Member</h1>
+          <form>
+          <table id="inputTable">
+            <tr>
+              <td>First Name:</td>
+              <td>Last Name:</td>
+              <td>Spouse Name:</td>
+            </tr>
+            <tr>
+              <td><input type="text" value= {member.firstname} onChange={e => {this.setState({member : {...member, firstname: e.target.value}})}}/></td>
+              <td><input type="text" value= {member.lastname} onChange={e => {this.setState({member : {...member, lastname: e.target.value}})}}/></td>
+              <td><input type="text"value= {member.spouse} onChange={e => {this.setState({member : {...member, spouse: e.target.value}})}}/></td>
+            </tr>
+            <tr>
+              <td>Phone Number:</td>
+              <td>Email:</td>
+              <td>Membership:</td>              
+            </tr>
+            <tr>
+              <td><input type="text" value= {member.phone} onChange={e => {this.setState({member : {...member, phone: e.target.value}})}}/></td>
+              <td><input type="email" value= {member.email} onChange={e => {this.setState({member : {...member, email: e.target.value}})}}/></td>
+              <td><select style={{width:"60%"}} onChange={e => {this.setState({member : {...member, Membership: e.target.value}})}}>
+                        <option>               </option>
+                        <option value="social">Social</option>
+                        <option value="tennis">Tennis</option>
+                        <option value="golf"  >Golf</option>
+                      </select></td>              
+            </tr>
+            <tr>
+              <td>Address:</td>
+              <td colSpan="2">Address 2:</td>
+            </tr>
+            <tr>
+              <td><input type="text"value= {member.address} onChange={e => {this.setState({member : {...member, address: e.target.value}})}}/></td>
+              <td colSpan="2"><input type="text" value= {member.address2} onChange={e => {this.setState({member : {...member, address2: e.target.value}})}}/></td>
+            </tr>
+            <tr>
+              <td>City:</td>
+              <td>State: </td>
+              <td>Postal Code:</td>              
+            </tr>
+            <tr>
+              <td><input type="text" value= {member.city} onChange={e => {this.setState({member : {...member, city: e.target.value}})}}/></td>
+              <td><input type="text" value= {member.district} onChange={e => {this.setState({member : {...member, district: e.target.value}})}}/></td>
+              <td><input type="text" value= {member.postal} onChange={e => {this.setState({member : {...member, postal: e.target.value}})}}/></td>              
+            </tr>
+          </table>
+          </form>
+          
+            <button style={{marginTop: "5px"}} onClick={this.onClick}>Submit Member</button>
         </div>
       );
+      
     }
+    
   }
   
   export default AddMemberPage;
   
-  /*
-
-    */
+  

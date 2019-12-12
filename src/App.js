@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {BrowserRouter as Router, Route, Switch, Link, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import FrontPage from './pages/FrontPage';
 import AddMemberPage from './pages/AddMemberPage';
+import AddProductPage from './pages/AddProductPage';
 
 class App extends Component{
   render(){
@@ -13,6 +14,7 @@ class App extends Component{
       <Switch>
         <Route exact path='/' component={FrontPage}/>
         <Route exact path='/AddMember' component={AddMemberPage}/>
+        <Route exact path='/AddProduct' component={AddProductPage}/>
       </Switch>
     </Router>
   }

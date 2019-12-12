@@ -18,13 +18,15 @@ class FrontPage extends Component{
   componentDidMount(){
     getAddress(this);
   }
+  
+  tableClick(){
+    
+  }
 
   renderAddress = address =><tr><td key={address.address_id} align="left">{address.address}</td><td align="right">{address.address2}</td><td align="right">{address.district}</td></tr>
 
   render(){
     const {address} = this.state;
-    console.log("Addr"+ address)
-    console.log("test");
     return (
       <div className="App">
       <SearchBar/>

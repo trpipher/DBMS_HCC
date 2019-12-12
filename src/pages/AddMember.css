@@ -1,0 +1,13 @@
+#inputTable{
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    align-self: center;
+}
+
+#inputTable td{
+    
+    text-align: left;
+    width: 300px;
+}
+
