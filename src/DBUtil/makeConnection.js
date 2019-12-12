@@ -69,4 +69,19 @@ app.get('/products/add', (req, res) =>{
     
 })
 
+app.get('/products/get', (req, res) =>{
+    const {sku} = req.query;
+    console.log( `select * from products where SKU=${sku};`);
+    connection.query(`select * from products where SKU=${sku};`, (err, results) =>{
+        if(err){
+            res.send(err);
+        }
+        else{
+            res.json({data:results})
+        }
+    })
+    
+})
+
+
 app.listen(3001, () => {console.log("Listening on port 3001")})

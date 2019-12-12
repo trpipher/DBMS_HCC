@@ -11,16 +11,31 @@ import {getAddress} from '../DBUtil/getAddress'
 
 class FrontPage extends Component{
   
+  constructor(props){
+    super(props);
+    this.child = React.createRef();
+    this.kid = React.createRef();
+  }
+
   state = {
     address : []
+    
   }  
 
   componentDidMount(){
     getAddress(this);
   }
   
-  tableClick(){
-    
+ 
+
+  
+  tableClick = (e) => {
+    let row = e.target.parentNode;
+    if(!isNaN(row.childNodes[3].innerHTML)){
+      this.child.current.add(row.childNodes[3].innerHTML, row.childNodes[0].innerHTML, row.childNodes[1].innerHTML);
+      this.kid.current.updateTotal(this.child.current.totalVal());
+    }
+   console.log(row);
   }
 
   renderAddress = address =><tr><td key={address.address_id} align="left">{address.address}</td><td align="right">{address.address2}</td><td align="right">{address.district}</td></tr>
@@ -32,7 +47,7 @@ class FrontPage extends Component{
       <SearchBar/>
       <header className="App-header" style={{ display: "block"}}>
         <div style={{float:"left", display: "inline-block", width: "70%"}}>
-            <ProductTable/>
+            <ProductTable  tabClick={this.tableClick} />
 {/*           <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.js</code> and save to reload.
@@ -46,8 +61,8 @@ class FrontPage extends Component{
             Learn React
           </a> */}
         </div>
-        <CheckoutCard/>
-        <CustomerCart/>
+        <CheckoutCard ref={this.kid}/>
+        <CustomerCart ref={this.child}/>
                 
         <table><thead><tr><th align="left">Address</th><th>Address2</th><th>State</th></tr></thead>
         <tbody>{address.map(this.renderAddress)}</tbody></table>

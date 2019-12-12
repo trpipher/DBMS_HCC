@@ -1,11 +1,33 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-function CheckoutCard(props){
+class CheckoutCard extends Component{
+    constructor(props){
+        super(props)
+        this.subtotal = 0;
+        this.taxPerc = .09;
+        this.tax = 0;
+        this.total = 0;
+    }
+
+
+    updateTotal(total){
+        this.subtotal = total;
+        this.tax = this.taxPerc* total;
+        this.total = this.subtotal + this.tax;
+        this.setState({state:this.state})
+    }
+
+
+    render(){
+        const total = this.total.toFixed(2);
+        const tax = this.tax.toFixed(2);
+        const subtotal = this.subtotal.toFixed(2);
+
     return(
             <Card bg="dark" text="white">
                 <Card.Header>Checkout</Card.Header>
@@ -15,17 +37,17 @@ function CheckoutCard(props){
 
                         <Row>
                             <Col>Subtotal</Col>
-                            <Col>$318.96</Col>
+                            <Col>${subtotal}</Col>
                         </Row>
 
                         <Row>
                             <Col>Tax 9.000%</Col>
-                            <Col>$28.71</Col>
+                            <Col>${tax}</Col>
                         </Row>
 
                         <Row>
                             <Col><strong>Total</strong></Col>
-                            <Col><strong>$347.67</strong></Col>
+                            <Col><strong>${total}</strong></Col>
                         </Row>
                     </Card>
                 </Container>
@@ -45,7 +67,7 @@ function CheckoutCard(props){
 
                 
             </Card>
-    )
+    )}
 }
 
 var vertical = {
